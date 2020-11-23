@@ -242,11 +242,44 @@ acme_sh_default_issue_renew_hook: ""
 acme_sh_default_remove: False
 
 # acme.sh dns alias document https://github.com/acmesh-official/acme.sh/wiki/DNS-alias-mode
-# If your DNS provider doesn't support API access, 
-# or if you're concerned about security problems from giving the DNS API access to your main domain, 
+# If your DNS provider doesn't support API access,
+# or if you're concerned about security problems from giving the DNS API access to your main domain,
 # then you can use DNS alias mode.
 acme_sh_default_domain_alias: ""
 acme_sh_default_challenge_aliass: ""
+
+# When set to True, enable notification from Acme.sh cronjob
+# https://github.com/acmesh-official/acme.sh/wiki/notify
+# You should set it back to False when you're done, if you don't want to receive
+# each time you run Ansible, notification should be set once.
+acme_sh_enable_notify: False
+
+# List of notification hooks to call when notifications are enabled
+# Example
+#     acme_sh_notify_hooks:
+#        - sendgrid
+#        - slack
+acme_sh_notify_hooks: []
+
+# What are your the notify ENV vars?
+# The key names to use can be found at:
+# https://github.com/acmesh-official/acme.sh/wiki/notify
+# Just add them as key / value pairs here
+# without the "export ".
+#
+# For example if you were using haproxy as deploy hook you would enter:
+#    acme_sh_default_deploy_env_vars:
+#       "MAIL_FROM": "xxx@xxx.xx"
+#       "MAIL_TO":"yyy@yyy.yy"
+acme_sh_notify_env_var: {}
+
+# Set level of notify command
+# Find meaning of available values here : https://github.com/acmesh-official/acme.sh/wiki/notify
+acme_sh_notify_level: 2
+
+# Set mode of notify command
+# Find meaning of available values here : https://github.com/acmesh-official/acme.sh/wiki/notify
+acme_sh_notify_mode: 0
 
 # This list contains a list of domains, along with key / value pairs to
 # configure each set of domains individually.
@@ -366,7 +399,7 @@ acme_sh_domains:
 # 1 certificate file for all of the domains.
 # use dns and dns alias
 acme_sh_domains:
-  - domains: ["example.com", "www.example.com"]  
+  - domains: ["example.com", "www.example.com"]
     challenge_alias: alias-example.com
 
 # Produces this on your server:
