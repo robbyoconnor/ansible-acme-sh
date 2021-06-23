@@ -59,7 +59,7 @@
     state: "directory"
     owner: "{{ acme_sh_become_user }}"
     group: "{{ acme_sh_become_user }}"
-    mode: "0755"
+    mode: "0750"
   when: not acme_sh_uninstall
 
 - name: Uninstall acme.sh and disable all certificate renewals
